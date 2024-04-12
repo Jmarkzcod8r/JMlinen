@@ -168,7 +168,7 @@ export default async function Front() {
 
       <div className='flex flex-row gap-2 justify-start pb-1 '>
         {/* Justify-end is like having an anchor on the right side and justify-start on the left*/}
-      <h4 className="text-sm sm:text-md md:text-lg py-2 bg-blue-400 p-4 rounded-md w-full">Featured Products</h4>
+      <h4 className="text-sm sm:text-md md:text-lg py-2 bg-blue-400 p-4 rounded-md w-full">Featured    Products</h4>
       {/* <h4 className="text-sm sm:text-md md:text-lg py-2 bg-blue-400 p-4 rounded-md">Products</h4>
       <h4 className="text-sm sm:text-md md:text-lg py-2 bg-blue-400 p-4 rounded-md">About</h4> */}
 
