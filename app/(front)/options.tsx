@@ -137,6 +137,7 @@ function DropdownExample() {
                     <h2>Height (inches):</h2>
                     <h2 className=''>{height}</h2>
                 </div>
+                <div>Size:</div>
                 <select className='bg-blue-300 mt-1 w-[5em]' name="size" value={size} onChange={handleInputChange}>
                     <option value='XS'>XS</option>
                     <option value='S'>S</option>
@@ -146,20 +147,21 @@ function DropdownExample() {
                     <option value='XXL'>XXL</option>
                 </select>
             </div>
-            <div className='p-2'>
+            <div className='p-2 grid place-items-center'>
                 <h3>First Name</h3>
-                <input className='max-w-[14em]' name="firstName" value={firstName} onChange={handleInputChange} />
+                <input className='max-w-[14em] lg:max-w-[30em]' name="firstName" value={firstName} onChange={handleInputChange} />
 
                 <h3>Last Name</h3>
-                <input className='max-w-[14em]' name="lastName" value={lastName} onChange={handleInputChange} />
+                <input className='max-w-[14em] lg:max-w-[30em]' name="lastName" value={lastName} onChange={handleInputChange} />
 
                 <h3>Remarks</h3>
-                <textarea name="remarks" value={remarks} onChange={handleInputChange} />
+                <textarea className='lg:w-[15.5em]' name="remarks" value={remarks} onChange={handleInputChange} />
 
-                <div className="flex justify-center">
-                    <button type="submit" className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Submit</button>
+                <div>
+                    <button type="submit" className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 rounded'>Submit</button>
                 </div>
             </div>
+
         </form>
     );
 }
