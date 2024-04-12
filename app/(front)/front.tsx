@@ -48,30 +48,12 @@ export default async function Front() {
     <>
     <div className='bg-black-200'>
 
-      <div className="w-full carousel rounded-box mt-4 bg-pink-400 z-0 p-1">
+      <div className="w-full carousel rounded-box mt-4 bg-pink-400 z-0 ">
       <img src='/images/JMLinen2.png' className="max-w-full" alt={''} />
       </div>
                 <Search/> {/* This component utilizes `use client` which is contained only for its use */}
 
-                <div className="w-full rounded-box mt-4 p-2 bg-pink-400 z-0 grid grid-ccols-2 sm:grid-cols-3">
-
-    <div className=" sm:w-full w-[16em] flex justify-around p-1">
-        <Image src='/images/T-shirt.png' alt={''} width={250} height={250} className='rounded-md'/>
-    </div>
-
-   <div className='p-3'><DropdownExample/></div>
-
-   <div className='p-2'>
-    <h3>First Name</h3>
-    <input style={{ display: 'inline-block' }} />
-
-    <h3>Last Name</h3>
-    <input style={{ display: 'inline-block' }} />
-
-    <h3>Remarks</h3>
-    <textarea style={{ display: 'inline-block' }} />
-</div>
-</div>
+    <DropdownExample/>
 
     </div>
     </>

@@ -49,7 +49,7 @@ const Search = () => {
     <div className="flex justify-around text-sm my-2 sm:text-md md:text-lg py-2 bg-blue-400 p-4 rounded-md w-full">
       <div>
         <input
-          placeholder= {name? 'Search a product':'Search a store'}
+          placeholder= {`enter T-shirt ID`}
           className='searchbar h-[2em]'
           value={storeName}
           onChange={(e) => setStoreName(e.target.value)}

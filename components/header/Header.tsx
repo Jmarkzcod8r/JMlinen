@@ -29,8 +29,8 @@ const Header = ({}) => {
         <Link
         // href={'/'}
         href={name? `/store/store?name=${name}` : '/'}
-        className='btn btn-ghost text-lg sm:block '>
-        <h1> {name? name : 'GensanShop'}</h1>
+        className='btn btn-ghost text-lg sm:block text-center justify-center  '>
+        <h1 className='text-center justify-center'> {name? name : 'JMLinen'}</h1>
         {/* <h1> GensanSweets</h1> */}
         </Link>
         {/* <Menumid/> */}
