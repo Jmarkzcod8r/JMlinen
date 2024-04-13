@@ -1,33 +1,78 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FcSearch } from "react-icons/fc";
 import axios from 'axios';
 import { useRouter } from 'next/navigation'; // Import useRouter
 import { useSearchParams } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 const Search = () => {
-  const [storeName, setStoreName] = useState('');
+  const [id, setID] = useState('');
   const router = useRouter(); // Initialize useRouter
   const searchParams = useSearchParams()
-  const name = searchParams.get('name')
+  const query = searchParams.get('q')
 
-  const handleSearch = async () => {
+  function copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Copied!',
+          text: 'T-shirt ID copied to clipboard'
+        });
+      })
+      .catch((error) => {
+        console.error('Failed to copy:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Failed to copy T-shirt ID to clipboard'
+        });
+      });
+  }
+
+
+  const handleSearch = async (id) => {
     try {
-      const response = await axios.post('/api/search', { name: storeName });
+      const response = await axios.post('/api/T-shirt-size/search', { _id: id });
 
       if (response.status >= 200 && response.status < 300) {
         // Process the data received from the API
         console.log(response.data);
 
-        if (!response.data.success) {
-          alert('No store found');
-        } else {
-          // Open the specific store URL in a new window
-          window.open(`/store/store?name=${response.data.store.name}`, '_blank', 'noopener,noreferrer');
-          // Alert that store is found
-          alert('Store found');
+        if (response) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            html: `<div>
+            <img src='/images/T-shirt.png' className='w-[2em] h-[1em]' />
+            <br/>
+            <span>name: ${response.data.tshirt.firstName} ${response.data.tshirt.lastName}</span>
+
+            <br/>
+            <span>size: ${response.data.tshirt.size} </span>
+            <span>width: ${response.data.tshirt.width}" (in)</span>
+            <span>height: ${response.data.tshirt.height}" (in)</span>
+            <br/>
+            <span>remarks: ${response.data.tshirt.remarks}</span>
+            <br/>
+            <span>ID: ${response.data.tshirt._id}</span>
+
+          </div>
+          `
+          });
         }
+
+
+        // if (!response.data.success) {
+        //   alert('No store found');
+        // } else {
+        //   // Open the specific store URL in a new window
+        //   window.open(`/store/store?name=${response.data.store.name}`, '_blank', 'noopener,noreferrer');
+        //   // Alert that store is found
+        //   alert('Store found');
+        // }
       } else {
         throw new Error('Network response was not ok');
       }
@@ -41,21 +86,29 @@ const Search = () => {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      handleSearch(id);
     }
   };
+
+  useEffect(() => {
+    if (query) {
+      handleSearch(query);
+    }
+  }, [query]);
+
 
   return (
     <div className="flex justify-around text-sm my-2 sm:text-md md:text-lg py-2 bg-blue-400 p-4 rounded-md w-full">
       <div>
-        <input
-          placeholder= {`enter T-shirt ID`}
-          className='searchbar h-[2em]'
-          value={storeName}
-          onChange={(e) => setStoreName(e.target.value)}
-          onKeyDown={handleKeyDown} // Call handleSearch on Enter key press
-        />
-        <button onClick={handleSearch}>
+      <input
+  placeholder={`Enter T-shirt ID`}
+  className='searchbar h-[2em] w-[14em] sm:w-[20em] text-center'
+  value={id}
+  onChange={(e) => setID(e.target.value)}
+  onKeyDown={handleKeyDown} // Call handleSearch on Enter key press
+/>
+
+<button onClick={() => handleSearch(id)}>
           <FcSearch className='scale-150 mx-2' />
         </button>
       </div>
