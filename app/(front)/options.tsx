@@ -194,7 +194,7 @@ function DropdownExample() {
             <div className=" w-full  flex justify-center p-1">
                 <Image src='/images/T-shirt.png' alt={''} width={200} height={150} className='rounded-md'/>
             </div>
-            <div className='p-3 bg-blue-100 text-center rounded-md'>
+            <div className='p-3 bg-blue-100 text-center rounded-md flex flex-col justify-around'>
                 <div>
                     <h2>Width (inches):</h2>
                     <h2 className=''>{width? width:<br/>}</h2>
@@ -204,14 +204,14 @@ function DropdownExample() {
                     <h2 className=''>{height? height: <br/>}</h2>
                 </div>
                 <div>Size:</div>
-                <select className='bg-blue-300 mt-1 w-[5em]' name="size" value={size} onChange={handleInputChange}>
+                <div><select className='bg-blue-300 mt-1 w-[5em]' name="size" value={size} onChange={handleInputChange}>
                     <option value='XS'>XS</option>
                     <option value='S'>S</option>
                     <option value='M'>M</option>
                     <option value='L'>L</option>
                     <option value='XL'>XL</option>
                     <option value='XXL'>XXL</option>
-                </select>
+                </select></div>
             </div>
             <div className='p-2 grid place-items-center'>
                 <h3>First Name</h3>
