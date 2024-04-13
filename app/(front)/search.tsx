@@ -46,33 +46,34 @@ const Search = () => {
             icon: 'success',
             title: 'Success!',
             html: `<div>
-            <img src='/images/T-shirt.png' className='w-[2em] h-[1em]' />
-            <br/>
-            <span>name: ${response.data.tshirt.firstName} ${response.data.tshirt.lastName}</span>
+                    <img src='/images/T-shirt.png' className='w-[2em] h-[1em]' />
+                    <br/>
+                    <span>name: ${response.data.tshirt.firstName} ${response.data.tshirt.lastName}</span>
+                    <br/>
+                    <span>size: ${response.data.tshirt.size} </span>
+                    <span>width: ${response.data.tshirt.width}" (in)</span>
+                    <span>height: ${response.data.tshirt.height}" (in)</span>
+                    <br/>
+                    <span>remarks: ${response.data.tshirt.remarks}</span>
+                    <br/>
+                    <span>ID: ${response.data.tshirt._id}</span>
 
-            <br/>
-            <span>size: ${response.data.tshirt.size} </span>
-            <span>width: ${response.data.tshirt.width}" (in)</span>
-            <span>height: ${response.data.tshirt.height}" (in)</span>
-            <br/>
-            <span>remarks: ${response.data.tshirt.remarks}</span>
-            <br/>
-            <span>ID: ${response.data.tshirt._id}</span>
-
-          </div>
-          `
+                  </div>`,
+            showCloseButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Copy Link',
+            cancelButtonText: 'OK',
+            showConfirmButton: true,
+            preConfirm: () => {
+              const currentURL = window.location.href;
+              const urlWithoutQuery = currentURL.split('?')[0];
+              copyToClipboard(`${urlWithoutQuery}?q=${response.data.tshirt._id}`);
+            }
           });
+
+          // Add event listener for the Copy Link button
+
         }
-
-
-        // if (!response.data.success) {
-        //   alert('No store found');
-        // } else {
-        //   // Open the specific store URL in a new window
-        //   window.open(`/store/store?name=${response.data.store.name}`, '_blank', 'noopener,noreferrer');
-        //   // Alert that store is found
-        //   alert('Store found');
-        // }
       } else {
         throw new Error('Network response was not ok');
       }
@@ -83,6 +84,7 @@ const Search = () => {
       // Handle errors here
     }
   };
+
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
