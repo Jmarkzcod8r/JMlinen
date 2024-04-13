@@ -35,55 +35,57 @@ const Search = () => {
 
   const handleSearch = async (id) => {
     try {
-      const response = await axios.post('/api/T-shirt-size/search', { _id: id });
+        const response = await axios.post('/api/T-shirt-size/search', { _id: id });
 
-      if (response.status >= 200 && response.status < 300) {
-        // Process the data received from the API
-        console.log(response.data);
+        if (response.status >= 200 && response.status < 300) {
+            // Process the data received from the API
+            console.log(response.data);
 
-        if (response) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            html: `<div>
-                    <img src='/images/T-shirt.png' className='w-[2em] h-[1em]' />
-                    <br/>
-                    <span>name: ${response.data.tshirt.firstName} ${response.data.tshirt.lastName}</span>
-                    <br/>
-                    <span>size: ${response.data.tshirt.size} </span>
-                    <span>width: ${response.data.tshirt.width}" (in)</span>
-                    <span>height: ${response.data.tshirt.height}" (in)</span>
-                    <br/>
-                    <span>remarks: ${response.data.tshirt.remarks}</span>
-                    <br/>
-                    <span>ID: ${response.data.tshirt._id}</span>
-
-                  </div>`,
-            showCloseButton: true,
-            showCancelButton: true,
-            confirmButtonText: 'Copy Link',
-            cancelButtonText: 'OK',
-            showConfirmButton: true,
-            preConfirm: () => {
-              const currentURL = window.location.href;
-              const urlWithoutQuery = currentURL.split('?')[0];
-              copyToClipboard(`${urlWithoutQuery}?q=${response.data.tshirt._id}`);
+            if (response.data && response.data.tshirt) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    html: `<div>
+                                <img src='/images/T-shirt.png' className='w-[2em] h-[1em]' />
+                                <br/>
+                                <span>name: ${response.data.tshirt.firstName} ${response.data.tshirt.lastName}</span>
+                                <br/>
+                                <span>size: ${response.data.tshirt.size} </span>
+                                <span>width: ${response.data.tshirt.width}" (in)</span>
+                                <span>height: ${response.data.tshirt.height}" (in)</span>
+                                <br/>
+                                <span>remarks: ${response.data.tshirt.remarks}</span>
+                                <br/>
+                                <span>ID: ${response.data.tshirt._id}</span>
+                            </div>`,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Copy Link',
+                    cancelButtonText: 'OK',
+                    showConfirmButton: true,
+                    preConfirm: () => {
+                        const currentURL = window.location.href;
+                        const urlWithoutQuery = currentURL.split('?')[0];
+                        copyToClipboard(`${urlWithoutQuery}?q=${response.data.tshirt._id}`);
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'No T-shirt Found',
+                    text: 'No T-shirt found with the provided ID.'
+                });
             }
-          });
-
-          // Add event listener for the Copy Link button
-
+        } else {
+            throw new Error('Network response was not ok');
         }
-      } else {
-        throw new Error('Network response was not ok');
-      }
 
-      console.log(`success?`, response.data.success);
+        console.log(`success?`, response.data.success);
     } catch (error) {
-      console.error('Error:', error);
-      // Handle errors here
+        console.error('Error:', error);
+        // Handle errors here
     }
-  };
+};
 
 
   const handleKeyDown = (e) => {
